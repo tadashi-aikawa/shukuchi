@@ -1,13 +1,13 @@
 {
   "name": "shukuchi",
   "version": "0.1.0",
-  "description": "TODO",
+  "description": "Shukuchi is an Obsidian plugin that enables you to teleport to links (URL or internal link).",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
     "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
     "test": "jest",
-    "version": "node version-bump.mjs && git add manifest.json versions.json",
+    "version": "node version-bump.mjs && git add manifest-beta.json manifest.json versions.json",
     "prepare": "husky install",
     "pre:commit": "tsc -noEmit -skipLibCheck && npm run test"
   },

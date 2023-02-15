@@ -1,3 +1,18 @@
-# Shukuchi
+# Shukuchi (縮地)
 
-TODO:
+[![release](https://img.shields.io/github/release/tadashi-aikawa/shukuchi.svg)](https://github.com/tadashi-aikawa/shukuchi/releases/latest)
+[![Tests](https://github.com/tadashi-aikawa/shukuchi/workflows/Tests/badge.svg)](https://github.com/tadashi-aikawa/shukuchi/actions)
+![downloads](https://img.shields.io/github/downloads/tadashi-aikawa/shukuchi/total)
+
+Shukuchi is an Obsidian plugin that enables you to teleport to links (URL or internal link).
+
+## ⏬ Install
+
+Use [BRAT] (`tadashi-aikawa/shukuchi`).
+
+## ❓ Why the plugin's name is Shukuchi (縮地)?
+
+> The word shukuchi (縮地) is a Japanese-language term for various mythical techniques of rapid movement.  
+> (referenced from [Shukuchi \- Wikipedia](https://en.wikipedia.org/wiki/Shukuchi))
+
+[BRAT]: https://github.com/TfTHacker/obsidian42-brat
