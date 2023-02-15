@@ -1,6 +1,7 @@
 import { Plugin } from "obsidian";
 import { DEFAULT_SETTINGS, Settings, ShukuchiSettingTab } from "./settings";
 import { AppHelper } from "./app-helper";
+import { createCommands } from "./commands";
 
 export default class ShukuchiPlugin extends Plugin {
   settings: Settings;
@@ -11,21 +12,9 @@ export default class ShukuchiPlugin extends Plugin {
     this.appHelper = new AppHelper(this.app);
     this.init();
 
-    this.addCommand({
-      id: "main-command",
-      name: "Main command",
-      checkCallback: (checking: boolean) => {
-        if (
-          this.appHelper.getActiveFile() &&
-          this.appHelper.getActiveMarkdownView()
-        ) {
-          if (!checking) {
-            // TODO:
-          }
-          return true;
-        }
-      },
-    });
+    createCommands(this.appHelper, this.settings).forEach((c) =>
+      this.addCommand(c)
+    );
 
     this.addSettingTab(new ShukuchiSettingTab(this.app, this));
   }

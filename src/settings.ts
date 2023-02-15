@@ -1,12 +1,14 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
 import type ShukuchiPlugin from "./main";
+import { Direction, directionList } from "./commands";
+import { mirror } from "./utils/collections";
 
 export interface Settings {
-  hoge: string;
+  directionOfPossibleTeleportation: Direction;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
-  hoge: "",
+  directionOfPossibleTeleportation: "both",
 };
 
 export class ShukuchiSettingTab extends PluginSettingTab {
@@ -24,14 +26,17 @@ export class ShukuchiSettingTab extends PluginSettingTab {
 
     containerEl.createEl("h2", { text: "General" });
 
-    new Setting(containerEl).setName("Hoge").addText((text) =>
-      text
-        .setPlaceholder("ex: hoge.md")
-        .setValue(this.plugin.settings.hoge)
-        .onChange(async (value) => {
-          this.plugin.settings.hoge = value;
-          await this.plugin.saveSettings();
-        })
-    );
+    new Setting(containerEl)
+      .setName("Direction of possible teleportation")
+      .addDropdown((cb) =>
+        cb
+          .addOptions(mirror([...directionList]))
+          .setValue(this.plugin.settings.directionOfPossibleTeleportation)
+          .onChange(async (value) => {
+            this.plugin.settings.directionOfPossibleTeleportation =
+              value as Direction;
+            await this.plugin.saveSettings();
+          })
+      );
   }
 }

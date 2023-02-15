@@ -1,5 +1,9 @@
 import { App, Editor, MarkdownView, TFile } from "obsidian";
 
+type CoreCommand =
+  | "editor:open-link-in-new-leaf"
+  | "editor:follow-link"
+  | string;
 interface UnsafeAppInterface {
   commands: {
     commands: { [commandId: string]: any };
@@ -27,47 +31,7 @@ export class AppHelper {
     return this.getActiveMarkdownView()?.editor ?? null;
   }
 
-  getActiveFileContent(): string | null {
-    const editor = this.getActiveMarkdownEditor();
-    if (!editor) {
-      return null;
-    }
-
-    return editor.getValue();
-  }
-
-  getActiveLine(): string | null {
-    const editor = this.getActiveMarkdownEditor();
-    if (!editor) {
-      return null;
-    }
-
-    return editor.getLine(editor.getCursor().line);
-  }
-
-  insertStringToActiveFile(str: string): void {
-    this.getActiveMarkdownEditor()?.replaceSelection(str);
-  }
-
-  replaceStringInActiveLine(str: string): void {
-    const editor = this.getActiveMarkdownEditor();
-    if (!editor) {
-      return;
-    }
-
-    const { line, ch } = editor.getCursor();
-    editor.setLine(line, str);
-    editor.setCursor({ line, ch: Math.min(ch, str.length - 1) });
-  }
-
-  cycleListCheckList(): boolean {
-    return this.unsafeApp.commands.executeCommandById(
-      "editor:cycle-list-checklist"
-    );
-  }
-
-  isCheckedCurrentLineTask(): boolean {
-    const line = this.getActiveLine();
-    return line ? /[-*] \[x] .+/.test(line) : false;
+  executeCoreCommand(command: CoreCommand): boolean {
+    return this.unsafeApp.commands.executeCommandById(command);
   }
 }
