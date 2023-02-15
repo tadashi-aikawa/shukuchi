@@ -12,6 +12,10 @@ Shukuchi is an Obsidian plugin that enables you to teleport to links (URL or int
 
 Use [BRAT] (`tadashi-aikawa/shukuchi`).
 
+## ⚙️ Options
+
+![direction of possible teleportation](https://raw.githubusercontent.com/tadashi-aikawa/shukuchi/master/resources/direction-of-possible-teleportation.png)
+
 ## ❓ Why the plugin's name is Shukuchi (縮地)?
 
 > The word shukuchi (縮地) is a Japanese-language term for various mythical techniques of rapid movement.  
