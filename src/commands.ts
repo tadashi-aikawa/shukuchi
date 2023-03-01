@@ -72,7 +72,7 @@ function openLink(
   }));
 
   const urlsMatches = Array.from(
-    editor.getValue().matchAll(/(?<= |\n|^|\()(?<url>https?:\/\/[^ )\n]+)/g)
+    editor.getValue().matchAll(/[ \n^\(](?<url>https?:\/\/[^ )\n]+)/g)
   ) as RegExpMatchedArray[];
   const externalLinkPositions: Position[] = urlsMatches.map((x) => ({
     start: x.index,
@@ -93,7 +93,7 @@ function openLink(
   }
 
   if (currentOffset <= target.start || currentOffset > target.end) {
-    editor.setCursor(editor.offsetToPos(target.start + 1));
+    editor.setCursor(editor.offsetToPos(target.start + 3));
   }
 
   appHelper.executeCoreCommand(createCommand(option.leaf));
