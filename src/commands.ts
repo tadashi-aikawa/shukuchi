@@ -68,16 +68,16 @@ function openLink(
   const internalLinkPositions: Position[] = linksMatches.map((x) => ({
     start: x.index,
     end: x.index + x.groups.link.length,
-    line: editor.offsetToPos(x.index).line,
+    line: editor.offsetToPos(x.index + 1).line,
   }));
 
   const urlsMatches = Array.from(
-    editor.getValue().matchAll(/[ \n^\(](?<url>https?:\/\/[^ )\n]+)/g)
+    editor.getValue().matchAll(/(^| |\(|\n)(?<url>https?:\/\/[^ )\n]+)/g)
   ) as RegExpMatchedArray[];
   const externalLinkPositions: Position[] = urlsMatches.map((x) => ({
     start: x.index,
     end: x.index + x.groups.url.length,
-    line: editor.offsetToPos(x.index).line,
+    line: editor.offsetToPos(x.index + 1).line,
   }));
 
   const cursor = editor.getCursor();
