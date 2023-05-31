@@ -3,7 +3,7 @@
   "name": "Shukuchi",
   "version": "0.2.1",
   "minAppVersion": "0.16.3",
-  "description": "Shukuchi is an Obsidian plugin that enables you to teleport to links (URL or internal link) and jump to their destinations.",
+  "description": "Teleport to links (URL or internal link) and jump to their destinations.",
   "author": "tadashi-aikawa",
   "authorUrl": "https://minerva.mamansoft.net/",
   "isDesktopOnly": false
