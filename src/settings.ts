@@ -24,8 +24,6 @@ export class ShukuchiSettingTab extends PluginSettingTab {
 
     containerEl.empty();
 
-    containerEl.createEl("h2", { text: "General" });
-
     new Setting(containerEl)
       .setName("Direction of possible teleportation")
       .addDropdown((cb) =>
