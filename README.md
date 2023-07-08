@@ -16,7 +16,7 @@ The priority of choosing a link is as follows.
 
 ## ⏬ Install
 
-Use [BRAT] (`tadashi-aikawa/shukuchi`).
+You can download from `Community plugins` in Obsidian settings.
 
 ## ⚙️ Options
 
@@ -31,4 +31,3 @@ It both supports desktop and mobile.
 > The word shukuchi (縮地) is a Japanese-language term for various mythical techniques of rapid movement.  
 > (referenced from [Shukuchi \- Wikipedia](https://en.wikipedia.org/wiki/Shukuchi))
 
-[BRAT]: https://github.com/TfTHacker/obsidian42-brat
