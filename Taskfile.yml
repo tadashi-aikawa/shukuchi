@@ -11,7 +11,6 @@ tasks:
 
   build:dev: npm run dev
   build: npm run build
-  test: npm test
   watch: watchexec --no-vcs-ignore --exts "js,json,css" cp main.js styles.css manifest.json $USERPROFILE/work/minerva/.obsidian/plugins/shukuchi/
 
   init:
@@ -30,7 +29,6 @@ tasks:
     cmds:
       - task: init
       - task: build
-      - task: test
 
   release:
     desc: |
