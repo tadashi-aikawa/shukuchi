@@ -72,7 +72,7 @@ function openLink(
   }));
 
   const urlsMatches = Array.from(
-    editor.getValue().matchAll(/(^| |\(|\n)(?<url>https?:\/\/[^ )\n]+)/g)
+    editor.getValue().matchAll(/(^| |\(|\n)(?<url>[a-zA-Z+-.]+:\/\/[^ )\n]+)/g)
   ) as RegExpMatchedArray[];
   const externalLinkPositions: Position[] = urlsMatches.map((x) => ({
     start: x.index,
