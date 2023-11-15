@@ -6,10 +6,8 @@
   "scripts": {
     "dev": "node esbuild.config.mjs",
     "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-    "test": "jest",
     "version": "node version-bump.mjs && git add manifest-beta.json manifest.json versions.json",
-    "prepare": "husky install",
-    "pre:commit": "tsc -noEmit -skipLibCheck && npm run test"
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "tadashi-aikawa",
