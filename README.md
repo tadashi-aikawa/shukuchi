@@ -22,6 +22,12 @@ You can download from `Community plugins` in Obsidian settings.
 
 ![direction of possible teleportation](https://raw.githubusercontent.com/tadashi-aikawa/shukuchi/master/resources/direction-of-possible-teleportation.png)
 
+## 🎮 Commands
+
+- Open link
+- Open link in new tab
+- Open link in new window
+
 ## 📱 Mobile support
 
 It both supports desktop and mobile.
