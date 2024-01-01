@@ -11,7 +11,7 @@ tasks:
 
   build:dev: npm run dev
   build: npm run build
-  watch: watchexec --no-vcs-ignore --exts "js,json,css" cp main.js styles.css manifest.json $USERPROFILE/work/minerva/.obsidian/plugins/shukuchi/
+  watch: watchexec --no-vcs-ignore --exts "js,json,css" cp main.js styles.css manifest.json /mnt/c/Users/syoum/work/minerva/.obsidian/plugins/shukuchi/
 
   init:
     desc: Install dependencies
