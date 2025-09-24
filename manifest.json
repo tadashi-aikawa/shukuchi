@@ -1,7 +1,7 @@
 {
   "id": "shukuchi",
   "name": "Shukuchi",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "minAppVersion": "0.16.3",
   "description": "Teleport to links (URL or internal link) and jump to their destinations.",
   "author": "tadashi-aikawa",
