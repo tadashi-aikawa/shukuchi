@@ -2,6 +2,7 @@ import { App, Editor, MarkdownView, TFile } from "obsidian";
 
 type CoreCommand =
   | "editor:open-link-in-new-leaf"
+  | "editor:open-link-in-new-split"
   | "editor:follow-link"
   | string;
 interface UnsafeAppInterface {

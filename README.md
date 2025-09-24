@@ -26,6 +26,7 @@ You can download from `Community plugins` in Obsidian settings.
 
 - Open link
 - Open link in new tab
+- Open link in new tab group
 - Open link in new window
 
 ## 📱 Mobile support

@@ -5,7 +5,7 @@ import { sorter } from "./utils/collections";
 import { ExhaustiveError } from "./errors";
 import { RegExpMatchedArray } from "./utils/types";
 
-type LeafType = "same-tab" | "new-tab" | "new-window";
+type LeafType = "same-tab" | "new-tab" | "new-tabgroup" | "new-window";
 
 export const directionList = ["forward", "both"] as const;
 export type Direction = (typeof directionList)[number];
@@ -22,6 +22,8 @@ function createCommand(leaf: LeafType): string {
       return "editor:follow-link";
     case "new-tab":
       return "editor:open-link-in-new-leaf";
+    case "new-tabgroup":
+      return "editor:open-link-in-new-split";
     case "new-window":
       return "editor:open-link-in-new-window";
     default:
@@ -129,6 +131,21 @@ export function createCommands(
           if (!checking) {
             openLink(appHelper, {
               leaf: "new-tab",
+              direction: settings.directionOfPossibleTeleportation,
+            });
+          }
+          return true;
+        }
+      },
+    },
+    {
+      id: "open-link-in-new-tabgroup",
+      name: "Open link in new tab group",
+      checkCallback: (checking: boolean) => {
+        if (appHelper.getActiveFile() && appHelper.getActiveMarkdownView()) {
+          if (!checking) {
+            openLink(appHelper, {
+              leaf: "new-tabgroup",
               direction: settings.directionOfPossibleTeleportation,
             });
           }
