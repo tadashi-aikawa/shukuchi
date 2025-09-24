@@ -37,3 +37,29 @@ It both supports desktop and mobile.
 > The word shukuchi (縮地) is a Japanese-language term for various mythical techniques of rapid movement.  
 > (referenced from [Shukuchi \- Wikipedia](https://en.wikipedia.org/wiki/Shukuchi))
 
+
+## 🖥️ For developers / contributors
+
+### Pull requests
+
+Sorry, I would not accept the pull requests except for the following cases.
+
+1. Fix obvious bugs
+2. Fix typo or wrong documentation
+3. If I ask for it in the GitHub issues or the discussions
+
+### Development
+
+#### Install dependencies
+
+[Bun] is required.
+
+```console
+bun i
+bun dev
+```
+
+### Release
+
+Run [Release Action](https://github.com/tadashi-aikawa/shukuchi/actions/workflows/release.yaml) manually.
+

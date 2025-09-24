@@ -5,7 +5,7 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "module": "ESNext",
-    "target": "ES6",
+    "target": "es2018",
     "allowJs": true,
     "noImplicitAny": true,
     "moduleResolution": "node",
@@ -13,7 +13,9 @@
     "isolatedModules": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
-    "lib": ["DOM", "ES5", "ES6", "ES7"]
+    "allowSyntheticDefaultImports": true,
+    "lib": ["DOM", "ES5", "ES6", "ES7"],
+    "types": ["@types/bun"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "**/*.mts"]
 }
