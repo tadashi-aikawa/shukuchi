@@ -7,7 +7,7 @@ import { RegExpMatchedArray } from "./utils/types";
 
 type LeafType = "same-tab" | "new-tab" | "new-tabgroup" | "new-window";
 
-export const directionList = ["forward", "both"] as const;
+export const directionList = ["forward", "both", "backward"] as const;
 export type Direction = (typeof directionList)[number];
 
 interface Position {
@@ -31,17 +31,17 @@ function createCommand(leaf: LeafType): string {
   }
 }
 
-function selectTarget(
+function selectTargets(
   targets: Position[],
   currentOffset: number,
   cursor: EditorPosition,
   direction: Direction
-): Position | undefined {
+): Position[] {
   switch (direction) {
     case "forward":
       return targets
         .sort(sorter((x) => x.start))
-        .find((x) => x.end >= currentOffset);
+        .filter((x) => x.end >= currentOffset);
     case "both":
       return targets.sort(
         sorter(
@@ -51,19 +51,23 @@ function selectTarget(
               Math.abs(x.end - currentOffset)
             ) + (x.line === cursor.line ? 0 : 10000)
         )
-      )?.[0];
+      );
+    case "backward":
+      return targets
+        .sort(sorter((x) => x.start, "desc"))
+        .filter((x) => x.start <= currentOffset);
     default:
       throw new ExhaustiveError(direction);
   }
 }
 
-function openLink(
+function findTargets(
   appHelper: AppHelper,
-  option: { leaf: LeafType; direction: Direction }
-): void {
+  option: { direction: Direction }
+): Position[] {
   const editor = appHelper.getActiveMarkdownEditor();
   if (!editor) {
-    return;
+    return [];
   }
 
   const linksMatches = Array.from(
@@ -86,12 +90,57 @@ function openLink(
 
   const cursor = editor.getCursor();
   const currentOffset = editor.posToOffset(cursor);
-  const target = selectTarget(
+  return selectTargets(
     [...internalLinkPositions, ...externalLinkPositions],
     currentOffset,
     cursor,
     option.direction
   );
+}
+
+function moveToLink(
+  appHelper: AppHelper,
+  option: { direction: Direction }
+): void {
+  const editor = appHelper.getActiveMarkdownEditor();
+  if (!editor) {
+    return;
+  }
+
+  const cursor = editor.getCursor();
+  const currentOffset = editor.posToOffset(cursor);
+  const targets = findTargets(appHelper, option);
+  if (targets.length === 0) {
+    return;
+  }
+
+  const target =
+    targets.find((x) => {
+      switch (option.direction) {
+        case "forward":
+        case "both":
+          return x.start > currentOffset;
+        case "backward":
+          return x.end < currentOffset;
+        default:
+          throw new ExhaustiveError(option.direction);
+      }
+    }) || targets[0];
+  editor.setCursor(editor.offsetToPos(target.start + 3));
+}
+
+function openLink(
+  appHelper: AppHelper,
+  option: { leaf: LeafType; direction: Direction }
+): void {
+  const editor = appHelper.getActiveMarkdownEditor();
+  if (!editor) {
+    return;
+  }
+
+  const cursor = editor.getCursor();
+  const currentOffset = editor.posToOffset(cursor);
+  const target = findTargets(appHelper, option)?.[0];
   if (!target) {
     return;
   }
@@ -163,6 +212,30 @@ export function createCommands(
               leaf: "new-window",
               direction: settings.directionOfPossibleTeleportation,
             });
+          }
+          return true;
+        }
+      },
+    },
+    {
+      id: "move-to-next-link",
+      name: "Move to next link",
+      checkCallback: (checking: boolean) => {
+        if (appHelper.getActiveFile() && appHelper.getActiveMarkdownView()) {
+          if (!checking) {
+            moveToLink(appHelper, { direction: "forward" });
+          }
+          return true;
+        }
+      },
+    },
+    {
+      id: "move-to-previous-link",
+      name: "Move to previous link",
+      checkCallback: (checking: boolean) => {
+        if (appHelper.getActiveFile() && appHelper.getActiveMarkdownView()) {
+          if (!checking) {
+            moveToLink(appHelper, { direction: "backward" });
           }
           return true;
         }
