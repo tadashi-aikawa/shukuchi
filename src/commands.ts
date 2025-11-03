@@ -5,7 +5,12 @@ import { sorter } from "./utils/collections";
 import { ExhaustiveError } from "./errors";
 import { RegExpMatchedArray } from "./utils/types";
 
-type LeafType = "same-tab" | "new-tab" | "new-tabgroup" | "new-window";
+type LeafType =
+  | "same-tab"
+  | "new-tab"
+  | "new-tabgroup"
+  | "new-tabgroup-horizontally"
+  | "new-window";
 
 export const directionList = ["forward", "both", "backward"] as const;
 export type Direction = (typeof directionList)[number];
@@ -16,7 +21,9 @@ interface Position {
   line: number;
 }
 
-function createCommand(leaf: LeafType): string {
+function createCommand(
+  leaf: Exclude<LeafType, "new-tabgroup-horizontally">
+): string {
   switch (leaf) {
     case "same-tab":
       return "editor:follow-link";
@@ -149,7 +156,16 @@ function openLink(
     editor.setCursor(editor.offsetToPos(target.start + 3));
   }
 
-  appHelper.executeCoreCommand(createCommand(option.leaf));
+  if (option.leaf === "new-tabgroup-horizontally") {
+    const f = appHelper.getLinkFileOnCursor();
+    if (f) {
+      appHelper.splitTabGroup("horizontal");
+      // Promise
+      appHelper.openFile(f.path);
+    }
+  } else {
+    appHelper.executeCoreCommand(createCommand(option.leaf));
+  }
 }
 
 export function createCommands(
@@ -195,6 +211,21 @@ export function createCommands(
           if (!checking) {
             openLink(appHelper, {
               leaf: "new-tabgroup",
+              direction: settings.directionOfPossibleTeleportation,
+            });
+          }
+          return true;
+        }
+      },
+    },
+    {
+      id: "open-link-in-new-tabgroup-horizontally",
+      name: "Open link in new tab group horizontally",
+      checkCallback: (checking: boolean) => {
+        if (appHelper.getActiveFile() && appHelper.getActiveMarkdownView()) {
+          if (!checking) {
+            openLink(appHelper, {
+              leaf: "new-tabgroup-horizontally",
               direction: settings.directionOfPossibleTeleportation,
             });
           }
