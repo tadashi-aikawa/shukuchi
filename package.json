@@ -1,6 +1,6 @@
 {
   "name": "shukuchi",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Shukuchi is an Obsidian plugin that enables you to teleport to links (URL or internal link).",
   "main": "main.js",
   "scripts": {
