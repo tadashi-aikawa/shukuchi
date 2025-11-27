@@ -34,7 +34,7 @@ export class ShukuchiSettingTab extends PluginSettingTab {
             this.plugin.settings.directionOfPossibleTeleportation =
               value as Direction;
             await this.plugin.saveSettings();
-          })
+          }),
       );
   }
 }

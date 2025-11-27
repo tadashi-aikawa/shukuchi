@@ -22,7 +22,7 @@ interface Position {
 }
 
 function createCommand(
-  leaf: Exclude<LeafType, "new-tabgroup-horizontally">
+  leaf: Exclude<LeafType, "new-tabgroup-horizontally">,
 ): string {
   switch (leaf) {
     case "same-tab":
@@ -42,7 +42,7 @@ function selectTargets(
   targets: Position[],
   currentOffset: number,
   cursor: EditorPosition,
-  direction: Direction
+  direction: Direction,
 ): Position[] {
   switch (direction) {
     case "forward":
@@ -55,9 +55,9 @@ function selectTargets(
           (x) =>
             Math.min(
               Math.abs(x.start - currentOffset),
-              Math.abs(x.end - currentOffset)
-            ) + (x.line === cursor.line ? 0 : 10000)
-        )
+              Math.abs(x.end - currentOffset),
+            ) + (x.line === cursor.line ? 0 : 10000),
+        ),
       );
     case "backward":
       return targets
@@ -70,7 +70,7 @@ function selectTargets(
 
 function findTargets(
   appHelper: AppHelper,
-  option: { direction: Direction }
+  option: { direction: Direction },
 ): Position[] {
   const editor = appHelper.getActiveMarkdownEditor();
   if (!editor) {
@@ -78,7 +78,7 @@ function findTargets(
   }
 
   const linksMatches = Array.from(
-    editor.getValue().matchAll(/(?<link>\[\[[^\]]+]])/g)
+    editor.getValue().matchAll(/(?<link>\[\[[^\]]+]])/g),
   ) as RegExpMatchedArray[];
   const internalLinkPositions: Position[] = linksMatches.map((x) => ({
     start: x.index,
@@ -87,7 +87,7 @@ function findTargets(
   }));
 
   const urlsMatches = Array.from(
-    editor.getValue().matchAll(/(^| |\(|\n)(?<url>[a-zA-Z+-.]+:\/\/[^ )\n]+)/g)
+    editor.getValue().matchAll(/(^| |\(|\n)(?<url>[a-zA-Z+-.]+:\/\/[^ )\n]+)/g),
   ) as RegExpMatchedArray[];
   const externalLinkPositions: Position[] = urlsMatches.map((x) => ({
     start: x.index,
@@ -101,13 +101,13 @@ function findTargets(
     [...internalLinkPositions, ...externalLinkPositions],
     currentOffset,
     cursor,
-    option.direction
+    option.direction,
   );
 }
 
 function moveToLink(
   appHelper: AppHelper,
-  option: { direction: Direction }
+  option: { direction: Direction },
 ): void {
   const editor = appHelper.getActiveMarkdownEditor();
   if (!editor) {
@@ -138,7 +138,7 @@ function moveToLink(
 
 function openLink(
   appHelper: AppHelper,
-  option: { leaf: LeafType; direction: Direction }
+  option: { leaf: LeafType; direction: Direction },
 ): void {
   const editor = appHelper.getActiveMarkdownEditor();
   if (!editor) {
@@ -170,7 +170,7 @@ function openLink(
 
 export function createCommands(
   appHelper: AppHelper,
-  settings: Settings
+  settings: Settings,
 ): Command[] {
   return [
     {

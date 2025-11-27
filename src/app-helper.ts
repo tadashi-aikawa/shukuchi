@@ -58,7 +58,7 @@ export class AppHelper {
 
     const dstFile = this.unsafeApp.metadataCache.getFirstLinkpathDest(
       (editor as any).getClickableTokenAt(editor.getCursor()).text,
-      file.path
+      file.path,
     );
     if (!dstFile) {
       return null;

@@ -13,7 +13,7 @@ export default class ShukuchiPlugin extends Plugin {
     this.init();
 
     createCommands(this.appHelper, this.settings).forEach((c) =>
-      this.addCommand(c)
+      this.addCommand(c),
     );
 
     this.addSettingTab(new ShukuchiSettingTab(this.app, this));
