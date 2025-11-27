@@ -59,7 +59,7 @@ Sorry, I would not accept the pull requests except for the following cases.
 [Bun] is required.
 
 ```console
-bun i
+bun install --frozen-lockfile --ignore-scripts
 bun dev
 ```
 
