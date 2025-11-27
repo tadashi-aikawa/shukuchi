@@ -5,6 +5,12 @@ type CoreCommand =
   | "editor:open-link-in-new-split"
   | "editor:follow-link"
   | string;
+
+type UCodeMirror = {
+  /** CodeMirrorエディタにフォーカスします */
+  focus(): void;
+};
+
 interface UnsafeAppInterface {
   commands: {
     commands: { [commandId: string]: any };
@@ -30,6 +36,14 @@ export class AppHelper {
 
   getActiveMarkdownEditor(): Editor | null {
     return this.getActiveMarkdownView()?.editor ?? null;
+  }
+
+  getActiveCMEditor(): UCodeMirror | null {
+    const mdView = this.getActiveMarkdownView();
+    if (!mdView) {
+      return null;
+    }
+    return (mdView.editor as any).cm as UCodeMirror;
   }
 
   executeCoreCommand(command: CoreCommand): boolean {

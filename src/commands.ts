@@ -136,10 +136,10 @@ function moveToLink(
   editor.setCursor(editor.offsetToPos(target.start + 3));
 }
 
-function openLink(
+async function openLink(
   appHelper: AppHelper,
-  option: { leaf: LeafType; direction: Direction },
-): void {
+  option: { leaf: LeafType; direction: Direction; delayFocusInterval: number },
+): Promise<void> {
   const editor = appHelper.getActiveMarkdownEditor();
   if (!editor) {
     return;
@@ -166,6 +166,11 @@ function openLink(
   } else {
     appHelper.executeCoreCommand(createCommand(option.leaf));
   }
+
+  if (option.leaf === "same-tab" && option.delayFocusInterval > 0) {
+    await sleep(option.delayFocusInterval);
+    appHelper.getActiveCMEditor()?.focus();
+  }
 }
 
 export function createCommands(
@@ -182,6 +187,7 @@ export function createCommands(
             openLink(appHelper, {
               leaf: "same-tab",
               direction: settings.directionOfPossibleTeleportation,
+              delayFocusInterval: settings.delayFocusInterval,
             });
           }
           return true;
@@ -197,6 +203,7 @@ export function createCommands(
             openLink(appHelper, {
               leaf: "new-tab",
               direction: settings.directionOfPossibleTeleportation,
+              delayFocusInterval: settings.delayFocusInterval,
             });
           }
           return true;
@@ -212,6 +219,7 @@ export function createCommands(
             openLink(appHelper, {
               leaf: "new-tabgroup",
               direction: settings.directionOfPossibleTeleportation,
+              delayFocusInterval: settings.delayFocusInterval,
             });
           }
           return true;
@@ -227,6 +235,7 @@ export function createCommands(
             openLink(appHelper, {
               leaf: "new-tabgroup-horizontally",
               direction: settings.directionOfPossibleTeleportation,
+              delayFocusInterval: settings.delayFocusInterval,
             });
           }
           return true;
@@ -242,6 +251,7 @@ export function createCommands(
             openLink(appHelper, {
               leaf: "new-window",
               direction: settings.directionOfPossibleTeleportation,
+              delayFocusInterval: settings.delayFocusInterval,
             });
           }
           return true;
