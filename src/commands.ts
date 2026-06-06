@@ -78,8 +78,9 @@ function findTargets(
   }
 
   const linksMatches = Array.from(
-    editor.getValue().matchAll(/(?<link>\[\[[^\]]+]])/g),
+    editor.getValue().matchAll(/(?<link>\[\[[^\]]+\]\]|\[[^\]]+\]\([^)]+\))/g),
   ) as RegExpMatchedArray[];
+
   const internalLinkPositions: Position[] = linksMatches.map((x) => ({
     start: x.index,
     end: x.index + x.groups.link.length,
