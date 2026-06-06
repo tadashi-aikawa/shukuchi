@@ -50,7 +50,7 @@ It both supports desktop and mobile.
 
 [Bun] is required.
 
-```console
+```bash
 bun ci
 bun dev
 ```
