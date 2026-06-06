@@ -7,8 +7,9 @@
     "dev": "bun esbuild.config.mts",
     "build": "tsc -noEmit -skipLibCheck && bun esbuild.config.mts production",
     "typecheck": "tsc -noEmit -skipLibCheck",
-    "pre:push": "bun typecheck",
-    "verify": "bun ci && bun run build",
+    "test": "vitest run",
+    "pre:push": "bun typecheck && bun run test",
+    "verify": "bun ci && bun run test && bun run build",
     "release": "bun verify && bun version-bump.mts ${VERSION} && git add package.json manifest-beta.json manifest.json versions.json bun.lockb && git commit -m ${VERSION} && git tag ${VERSION} && git push --tags && git push"
   },
   "keywords": [],
@@ -23,6 +24,7 @@
     "obsidian": "1.8.7",
     "prettier": "3.8.3",
     "tslib": "2.8.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "4.1.8"
   }
 }
