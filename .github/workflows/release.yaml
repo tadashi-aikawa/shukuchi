@@ -8,10 +8,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
       - run: npm i -D --no-save conventional-changelog-conventionalcommits @semantic-release/git @semantic-release/exec
-      - uses: cycjimmy/semantic-release-action@v4
+      - uses: cycjimmy/semantic-release-action@v6
         with:
           semantic_version: 24.1.2
         env:
