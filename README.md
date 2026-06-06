@@ -2,6 +2,7 @@
 
 [![release](https://img.shields.io/github/release/tadashi-aikawa/shukuchi.svg)](https://github.com/tadashi-aikawa/shukuchi/releases/latest)
 ![downloads](https://img.shields.io/github/downloads/tadashi-aikawa/shukuchi/total)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/tadashi-aikawa/shukuchi)
 
 Shukuchi is an Obsidian plugin that enables you to teleport to links (URL or internal link) and jump to their destinations.
 
