@@ -1,5 +1,11 @@
 # Shukuchi (縮地)
 
+> [!IMPORTANT]
+> I rarely use Obsidian anymore.
+>
+> - Maintenance is limited to fixes for reported security vulnerabilities.
+> - No new features or non-security bug fixes are planned.
+
 [![release](https://img.shields.io/github/release/tadashi-aikawa/shukuchi.svg)](https://github.com/tadashi-aikawa/shukuchi/releases/latest)
 ![downloads](https://img.shields.io/github/downloads/tadashi-aikawa/shukuchi/total)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/tadashi-aikawa/shukuchi)
